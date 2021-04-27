@@ -28,22 +28,28 @@ setInterval(ratesBoard.getStocks, 60000);
 const moneyManager = new MoneyManager();
 moneyManager.addMoneyCallback = (data) => {
     ApiConnector.addMoney(data, response => {
-        moneyManager.setMessage(response.success, response.error);
-        if (response.success) ProfileWidget.showProfile(response.data);
+        if (response.success) {
+            moneyManager.setMessage(response.success, 'Success');
+            ProfileWidget.showProfile(response.data);
+        } else moneyManager.setMessage(response.success, response.error);
     })
 }
 
 moneyManager.conversionMoneyCallback = (data) => {
     ApiConnector.convertMoney(data, response => {
         moneyManager.setMessage(response.success, response.error);
-        if (response.success) ProfileWidget.showProfile(response.data);
+        if (response.success) {
+            ProfileWidget.showProfile(response.data);
+        }
     })
 }
 
 moneyManager.sendMoneyCallback = (data) => {
     ApiConnector.transferMoney(data, response => {
         moneyManager.setMessage(response.success, response.error);
-        if (response.success) ProfileWidget.showProfile(response.data);
+        if (response.success) {
+            ProfileWidget.showProfile(response.data);
+        }
     })
 }
 
